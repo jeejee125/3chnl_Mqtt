@@ -311,9 +311,9 @@ void loop() {
 openhab:
 
 Add the OpenHab Repository
-
+´´´
 sudo nano /etc/apt/sources.list.d/openhab.list
-
+´´´
 Insert
 
  deb http://repository-openhab.forge.cloudbees.com/release/1.6.2/apt-repo/ /
@@ -371,3 +371,7 @@ Switch lamp3 "Lampc" (all){mqtt=">[broker:/home/1/esp01/p3/com:command:on:ON],>[
 
 sudo /etc/init.d/openhab restart
 
+browser:
+´´´
+http://192.168.1.100:8080/openhab.app?sitemap=home
+´´´
