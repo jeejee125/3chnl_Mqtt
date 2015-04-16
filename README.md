@@ -311,47 +311,48 @@ void loop() {
 openhab:
 
 Add the OpenHab Repository
-´´´
+```bash
 sudo nano /etc/apt/sources.list.d/openhab.list
-´´´
-Insert
-
+```
+Insert:
+```bash
  deb http://repository-openhab.forge.cloudbees.com/release/1.6.2/apt-repo/ /
-
+```
 Install Java
-
+```bash
 echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" | tee /etc/apt/sources.list.d/webupd8team-java.list
 echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" | tee -a /etc/apt/sources.list.d/webupd8team-java.list
 apt-get install oracle-java8-installer
-
+```bash
 Install OpenHAB
-
+```bash
 sudo apt-get install openhab-runtime openhab-addon-binding-mqtt openhab-addon-action-mail openhab-addon-binding-bluetooth openhab-addon-binding-serial openhab-addon-binding-weather openhab-addon-persistence-rrd4j
-
+```
 
 Install Mosquitto
-
+```bash
 sudo apt-add-repository ppa:mosquitto-dev/mosquitto-ppa
 sudo apt-get install mosquitto mosquitto-clients
-
+```
 Start and Test Mosquitto
-
+```bash
 sudo /etc/init.d/mosquitto start
-
+```
 Configure OpenHAB to use a MQTT Binding
-
+```bash
 sudo nano /etc/openhab/configurations/openhab_default.cfg
-
+```
 At the very bottom, define a MQTT Broker:
-
+```bash
 mqtt:broker.url=tcp://192.168.1.100:1883
 mqtt:broker.clientId=openhab
 Exit, Save,  
-
+```
 restart OpenHAB
-
+```bash
 sudo /etc/init.d/openhab restart
-
+```
+```bash
 sudo nano /etc/openhab/configurations/sitemaps/home.sitemap
 
 sitemap demo label="Main Menu"
@@ -362,16 +363,18 @@ sitemap demo label="Main Menu"
    Switch item=lamp3 label="Lampc"
  }
 }
-
+```
+```bash
 sudo nano /etc/openhab/configurations/items/home.items
 
 Switch lamp1 "Lampa" (all){mqtt=">[broker:/home/1/esp01/p1/com:command:on:ON],>[broker:/home/1/esp01/p1/com:command:off:OFF],<[broker:/home/1/esp01/p1/state:state:default]"}
 Switch lamp2 "Lampb" (all){mqtt=">[broker:/home/1/esp01/p2/com:command:on:ON],>[broker:/home/1/esp01/p2/com:command:off:OFF],<[broker:/home/1/esp01/p2/state:state:default]"}
 Switch lamp3 "Lampc" (all){mqtt=">[broker:/home/1/esp01/p3/com:command:on:ON],>[broker:/home/1/esp01/p3/com:command:off:OFF],<[broker:/home/1/esp01/p3/state:state:default]"}
-
+```
+```bash
 sudo /etc/init.d/openhab restart
 
 browser:
-´´´
+
 http://192.168.1.100:8080/openhab.app?sitemap=home
-´´´
+
